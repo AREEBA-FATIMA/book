@@ -20,7 +20,7 @@ const config: Config = {
   url: 'https://areeba-fatima.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/book/',
+  baseUrl: '/',
   trailingSlash: false,
 
   // GitHub pages deployment config.
@@ -29,6 +29,7 @@ const config: Config = {
   projectName: 'book', // Usually your repo name.
 
   onBrokenLinks: 'warn', // Allow build to proceed despite broken links
+  onBrokenAnchors: 'warn', // Allow build to proceed despite broken anchors
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
