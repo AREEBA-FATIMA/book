@@ -1,0 +1,310 @@
+---
+id: chapter-2
+title: Mathematical Foundations for Robotics
+description: Master the essential mathematics behind robotics - linear algebra, calculus, probability, kinematics, dynamics, and optimization techniques for physical AI systems.
+keywords: ["Robot Kinematics", "Robot Dynamics", "Linear Algebra", "Robotics Mathematics", "Calculus for Robotics", "Optimization Robotics"]
+---
+
+import ProtectedRoute from '@site/src/components/ProtectedRoute';
+
+<ProtectedRoute>
+
+# Mathematical Foundations for Robotics
+
+Mathematics forms the bedrock of robotics, providing the language and tools to describe motion, forces, and intelligent behavior. This chapter establishes the mathematical framework necessary for understanding and designing robotic systems, bridging the gap between [Chapter 1's conceptual introduction](/chapter-1) and the practical implementations explored in later chapters.
+
+## 1. Linear Algebra for Robotics
+
+Linear algebra is ubiquitous in robotics, used to represent positions, orientations, and transformations.
+
+### 1.1 Vectors and Matrices
+
+A **vector** represents a point in space or a direction. In 3D robotics:
+
+```
+v = [x, y, z]ᵀ
+```
+
+**Matrices** describe transformations:
+- **Rotation matrices** (3×3) describe orientation
+- **Translation vectors** (3×1) describe position
+- **Homogeneous transformation matrices** (4×4) combine both
+
+```
+T = [R | t]   where R is 3×3 rotation, t is 3×1 translation
+    [0 | 1]
+```
+
+### 1.2 Coordinate Transformations
+
+Robots operate in multiple coordinate frames (world, robot base, end-effector). Transformations map points between frames:
+
+```
+p_world = T_world_robot × p_robot
+```
+
+:::tip Key Insight
+Understanding coordinate transformations is crucial for tasks like grasping, where you need to know object positions relative to the robot's hand.
+:::
+
+## 2. Robot Kinematics
+
+Kinematics describes the motion of robots without considering forces.
+
+### 2.1 Forward Kinematics
+
+Given joint angles **θ = [θ₁, θ₂, ..., θₙ]**, forward kinematics computes the end-effector position and orientation:
+
+```
+x = f(θ)
+```
+
+For a 2-link planar arm:
+
+```
+x = L₁cos(θ₁) + L₂cos(θ₁ + θ₂)
+y = L₁sin(θ₁) + L₂sin(θ₁ + θ₂)
+```
+
+Where L₁ and L₂ are link lengths.
+
+### 2.2 Inverse Kinematics
+
+The inverse problem: given desired end-effector pose **x**, find joint angles **θ**:
+
+```
+θ = f⁻¹(x)
+```
+
+This is often more complex and may have:
+- **No solution** (unreachable positions)
+- **Multiple solutions** (redundancy)
+- **Closed-form** or **numerical** solutions
+
+:::note Denavit-Hartenberg Parameters
+The DH convention provides a systematic method for deriving kinematic equations using four parameters per joint: link length (a), link twist (α), link offset (d), and joint angle (θ).
+:::
+
+### 2.3 Jacobian Matrix
+
+The **Jacobian** J relates joint velocities to end-effector velocities:
+
+```
+ẋ = J(θ) · θ̇
+```
+
+Critical for:
+- **Velocity control**: Mapping desired end-effector velocity to joint velocities
+- **Singularity analysis**: Points where the robot loses degrees of freedom
+- **Force control**: Relating end-effector forces to joint torques
+
+## 3. Robot Dynamics
+
+Dynamics incorporates forces and torques, describing how motion changes.
+
+### 3.1 Newton-Euler Formulation
+
+Based on Newton's laws:
+
+```
+F = ma    (force = mass × acceleration)
+τ = Iα    (torque = moment of inertia × angular acceleration)
+```
+
+### 3.2 Lagrangian Mechanics
+
+An elegant energy-based approach:
+
+```
+L = T - V
+```
+
+Where:
+- **T** = Kinetic energy
+- **V** = Potential energy
+
+The **Euler-Lagrange equation** yields:
+
+```
+d/dt(∂L/∂θ̇ᵢ) - ∂L/∂θᵢ = τᵢ
+```
+
+### 3.3 Robot Dynamics Equation
+
+The general form:
+
+```
+τ = M(θ)θ̈ + C(θ, θ̇)θ̇ + G(θ)
+```
+
+Where:
+- **M(θ)** = Mass/inertia matrix
+- **C(θ, θ̇)** = Coriolis and centrifugal terms
+- **G(θ)** = Gravity term
+- **τ** = Joint torques
+
+## 4. Calculus for Robotics
+
+### 4.1 Differentiation
+
+Used for:
+- Computing velocities and accelerations from positions
+- Gradient descent in optimization
+- Sensitivity analysis
+
+### 4.2 Integration
+
+Applications:
+- Trajectory planning (integrating acceleration → velocity → position)
+- Computing work and energy
+- Filtering sensor data
+
+### 4.3 Differential Equations
+
+Robot dynamics are described by differential equations:
+
+```
+θ̈ = M⁻¹(θ)[τ - C(θ, θ̇)θ̇ - G(θ)]
+```
+
+Solving these equations (numerically) predicts future robot states.
+
+## 5. Probability and Statistics
+
+### 5.1 Probabilistic Robotics
+
+Real-world robotics deals with uncertainty:
+- **Sensor noise**: Measurements are imperfect
+- **Actuation error**: Motors don't execute commands perfectly
+- **Environment uncertainty**: Unpredictable changes
+
+Probability distributions model this uncertainty:
+
+```
+p(x | z) = η · p(z | x) · p(x)
+```
+
+**Bayes' Theorem** updates beliefs given new sensor data **z**.
+
+### 5.2 Gaussian Distributions
+
+The normal distribution:
+
+```
+p(x) = (1/√(2πσ²)) · exp(-(x-μ)²/(2σ²))
+```
+
+Where μ is mean, σ is standard deviation. Central to Kalman filtering and sensor fusion.
+
+## 6. Optimization for Robotics
+
+Many robotics problems are optimization problems: find the "best" solution.
+
+### 6.1 Trajectory Optimization
+
+Find the path that minimizes time, energy, or jerk:
+
+```
+minimize: ∫ cost(θ(t), θ̇(t), θ̈(t)) dt
+subject to: constraints (joint limits, obstacles)
+```
+
+### 6.2 Gradient Descent
+
+Iteratively improve a solution:
+
+```
+θ_new = θ_old - α · ∇f(θ_old)
+```
+
+Where α is the learning rate, ∇f is the gradient.
+
+### 6.3 Constrained Optimization
+
+Robots operate under constraints (joint limits, collision avoidance). Methods include:
+- **Lagrange multipliers**
+- **Quadratic programming**
+- **Sequential quadratic programming (SQP)**
+
+## 7. Numerical Methods
+
+### 7.1 Numerical Integration
+
+Simulating robot dynamics requires integrating differential equations:
+- **Euler method**: Simple but inaccurate
+- **Runge-Kutta methods**: Higher accuracy
+- **Implicit methods**: Stability for stiff systems
+
+### 7.2 Root Finding
+
+Solving inverse kinematics often requires finding roots of nonlinear equations:
+- **Newton-Raphson method**
+- **Bisection method**
+
+## 8. Graph Theory and Planning
+
+### 8.1 Representing Environments
+
+**Graphs** model connectivity:
+- **Nodes**: States or configurations
+- **Edges**: Valid transitions
+
+### 8.2 Search Algorithms
+
+Finding paths through graphs:
+- **Dijkstra's algorithm**: Shortest path
+- **A* search**: Heuristic-guided search
+- **RRT (Rapidly-exploring Random Trees)**: Sampling-based motion planning
+
+## 9. Mathematical Tools Summary
+
+| Mathematical Tool | Primary Use in Robotics |
+|:------------------|:------------------------|
+| Linear Algebra | Transformations, kinematics |
+| Calculus | Dynamics, optimization |
+| Probability | Localization, sensor fusion |
+| Optimization | Trajectory planning, control |
+| Differential Equations | Modeling robot motion |
+| Graph Theory | Path planning, task scheduling |
+
+## 10. Computational Considerations
+
+### 10.1 Real-time Constraints
+
+Robots must compute control commands within tight time budgets (milliseconds). This requires:
+- Efficient algorithms (O(n) or O(n²) complexity)
+- Approximations when exact solutions are too slow
+- Hardware acceleration (GPUs, specialized processors)
+
+### 10.2 Numerical Stability
+
+Ill-conditioned matrices, singularities, and floating-point errors can cause failures. Techniques include:
+- **SVD (Singular Value Decomposition)** for robust matrix inversion
+- **Regularization** to avoid singularities
+- **Careful scaling** of variables
+
+## 11. Software Tools for Robotics Mathematics
+
+Modern robotics relies on powerful software libraries:
+
+```python
+import numpy as np  # Linear algebra
+import scipy  # Optimization, signal processing
+from roboticstoolbox import DHRobot  # Kinematics and dynamics
+
+# Example: Define a 2-link robot
+robot = DHRobot([
+    RevoluteDH(a=1.0),  # Link 1
+    RevoluteDH(a=0.5)   # Link 2
+])
+
+# Compute forward kinematics
+T = robot.fkine([0.5, 0.3])  # Joint angles in radians
+print(T)  # 4x4 transformation matrix
+```
+
+## 12. Summary of Chapter 2
+
+This chapter has established the mathematical foundations essential for robotics. We covered linear algebra for representing transformations, forward and inverse kinematics for relating joint and task spaces, dynamics for understanding forces and motion, probability for handling uncertainty, and optimization for planning and control. These mathematical tools are the language of robotics, enabling us to precisely describe, analyze, and design intelligent physical systems. Armed with this foundation, we now turn to [Chapter 3: Sensing and Perception](/chapter-3), where we explore how robots gather and interpret information about their environment.
+
+</ProtectedRoute>

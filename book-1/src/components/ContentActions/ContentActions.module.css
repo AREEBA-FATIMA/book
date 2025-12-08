@@ -1,0 +1,108 @@
+.container {
+    margin: 0;
+}
+
+.actionsBar {
+    background: var(--ifm-background-surface-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.actionBtn {
+    padding: 0.625rem 1.25rem;
+    background: var(--ifm-color-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.actionBtn:hover:not(:disabled) {
+    background: var(--ifm-color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.actionBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.resetBtn {
+    padding: 0.625rem 1.25rem;
+    background: var(--ifm-color-emphasis-200);
+    color: var(--ifm-color-content);
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.resetBtn:hover {
+    background: var(--ifm-color-emphasis-300);
+}
+
+.modeIndicator {
+    padding: 0.5rem 1rem;
+    background: var(--ifm-color-primary-lightest);
+    color: var(--ifm-color-primary-darker);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.content {
+    /* Content will render normally */
+}
+
+.error {
+    color: var(--ifm-color-danger);
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .actionsBar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .buttonGroup {
+        flex-direction: column;
+    }
+
+    .actionBtn,
+    .resetBtn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modeIndicator {
+        text-align: center;
+        justify-content: center;
+    }
+}

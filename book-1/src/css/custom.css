@@ -1,0 +1,202 @@
+/* THEME: Elegant Academic & Professional */
+/* Inspired by Princeton Press & Modern Textbooks */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap');
+
+:root {
+  /* Primary Brand Colors - Deep Navy & Slate */
+  --ifm-color-primary: #0f172a;
+  /* Navy 900 */
+  --ifm-color-primary-dark: #020617;
+  /* Navy 950 */
+  --ifm-color-primary-darker: #020617;
+  --ifm-color-primary-darkest: #000000;
+  --ifm-color-primary-light: #1e293b;
+  /* Slate 800 */
+  --ifm-color-primary-lighter: #334155;
+  /* Slate 700 */
+  --ifm-color-primary-lightest: #475569;
+  /* Slate 600 */
+
+  /* Neutral Tones for Reading */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-header: 'Merriweather', Georgia, serif;
+
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #f8fafc;
+  /* Very light slate */
+
+  --ifm-navbar-height: 4rem;
+  --ifm-navbar-background-color: #0f172a;
+  /* Dark Navy Navbar */
+  --ifm-navbar-link-color: #e2e8f0;
+  /* Light text on Navy */
+
+  /* Spacing & Layout */
+  --ifm-card-border-radius: 4px;
+  /* Sharp, clean corners */
+  --ifm-button-border-radius: 4px;
+  --ifm-global-radius: 4px;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #e2e8f0;
+  /* Slate 200 */
+  --ifm-color-primary-dark: #cbd5e1;
+  --ifm-color-primary-light: #f1f5f9;
+
+  --ifm-background-color: #020617;
+  /* Deep Navy Black */
+  --ifm-background-surface-color: #0f172a;
+
+  --ifm-navbar-background-color: #000000;
+  --ifm-navbar-link-color: #e2e8f0;
+}
+
+/* Typography Overrides for "Book" Feel */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ifm-font-family-header);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ifm-color-primary);
+}
+
+.hero__title {
+  font-family: var(--ifm-font-family-header);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #0f172a;
+  /* Explicit Navy */
+  line-height: 1.2;
+}
+
+[data-theme='dark'] .hero__title {
+  color: #f1f5f9;
+}
+
+.hero__subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  color: #475569;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+/* Navbar Tuning */
+.navbar {
+  border-bottom: 1px solid #1e293b;
+  box-shadow: none;
+}
+
+.navbar__title {
+  font-family: var(--ifm-font-family-header);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.navbar__item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+/* Button Refinement - Professional */
+.button--primary {
+  background-color: #0f172a;
+  border: 1px solid #0f172a;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 12px 24px;
+  transition: all 0.2s ease;
+}
+
+.button--primary:hover {
+  background-color: #1e293b;
+  border-color: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button--secondary {
+  background-color: transparent;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+[data-theme='dark'] .button--primary {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme='dark'] .button--secondary {
+  border-color: #475569;
+  color: #cbd5e1;
+}
+
+/* Card Styling - "Index Card" Look */
+.card {
+  background: var(--ifm-background-color);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+  border-color: #94a3b8;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.card__header h3 {
+  font-family: var(--ifm-font-family-header);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.card__body p {
+  font-family: 'Inter', sans-serif;
+  color: #64748b;
+  /* Muted slate text */
+  line-height: 1.6;
+}
+
+[data-theme='dark'] .card {
+  border-color: #1e293b;
+  background: #0f172a;
+}
+
+/* Sidebar Cleanliness */
+.menu__link {
+  font-family: 'Inter', sans-serif;
+  color: #475569;
+}
+
+.menu__link--active {
+  color: #0f172a;
+  background-color: #f1f5f9;
+  border-right: 3px solid #0f172a;
+  border-radius: 4px 0 0 4px;
+  /* Only round left side */
+}
+
+[data-theme='dark'] .menu__link {
+  color: #cbd5e1;
+}
+
+[data-theme='dark'] .menu__link--active {
+  color: #f1f5f9;
+  background-color: #1e293b;
+  border-right-color: #f1f5f9;
+}

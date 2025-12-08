@@ -1,0 +1,55 @@
+.textResponse {
+    padding: 0.5rem 0;
+}
+
+.markdown {
+    line-height: 1.7;
+    color: var(--ifm-color-content);
+}
+
+.markdown p {
+    margin-bottom: 1rem;
+}
+
+.markdown code {
+    background: var(--ifm-code-background);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.markdown pre {
+    background: var(--ifm-code-background);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.citations {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.citationsHeader {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ifm-color-emphasis-700);
+    margin-bottom: 0.5rem;
+}
+
+.citationList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.citation {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--ifm-color-primary-lightest);
+    color: var(--ifm-color-primary-darker);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
