@@ -106,15 +106,29 @@ async def chat_endpoint(message: ChatMessage):
         else:
             # 2. Standard RAG Flow
             print("DEBUG: Generating answer with LLM...")
-            response_text = generate_answer(context, message.content)
-            print("DEBUG: Answer generated.")
+            try:
+                response_text = generate_answer(context, message.content)
+                print("DEBUG: Answer generated.")
+            except Exception as llm_error:
+                print(f"DEBUG: LLM Generation failed: {llm_error}")
+                # Fallback or re-raise
+                raise llm_error
             
         return ChatResponse(response=response_text, citations=sources)
         
     except Exception as e:
         error_msg = str(e)
         import traceback
-        traceback.print_exc()
+        traceback_str = traceback.format_exc()
+        
+        # Write to file for debugging
+        try:
+            with open("error_log.txt", "w") as f:
+                f.write(f"Error: {error_msg}\n")
+                f.write(traceback_str)
+        except:
+            pass
+            
         print(f"!!! UPSTREAM API ERROR: {error_msg}")
         if "429" in error_msg or "quota" in error_msg.lower():
             raise HTTPException(status_code=429, detail="Rate limit exceeded. Please wait a moment and try again.")

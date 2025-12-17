@@ -75,9 +75,7 @@
     gap: 0.5rem;
 }
 
-.content {
-    /* Content will render normally */
-}
+
 
 .error {
     color: var(--ifm-color-danger);
