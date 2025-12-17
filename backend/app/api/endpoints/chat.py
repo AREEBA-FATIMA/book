@@ -31,14 +31,14 @@ COLLECTION_NAME = "textbook_collection"
 
 llm = ChatGoogleGenerativeAI(
     model=settings.LLM_MODEL_NAME, 
-    google_api_key=settings.LLM_API_KEY,
+    google_api_key=settings.LLM_API_KEY or "",
     temperature=0.3,
     max_retries=3
 )
 
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/text-embedding-004",
-    google_api_key=settings.LLM_API_KEY
+    google_api_key=settings.LLM_API_KEY or ""
 )
 
 # RAG Prompt

@@ -2,7 +2,7 @@ from app.agents.base import AgentSkill
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-import os
+from config import settings
 
 class QuizSkill(AgentSkill):
     name = "quiz_generator"
@@ -11,7 +11,7 @@ class QuizSkill(AgentSkill):
     def __init__(self):
         self.llm = ChatGoogleGenerativeAI(
             model="gemini-pro",
-            google_api_key=os.getenv("LLM_API_KEY"),
+            google_api_key=settings.LLM_API_KEY or "",
             temperature=0.7
         )
         template = """You remain a helpful AI assistant.
@@ -35,7 +35,7 @@ class QuizSkill(AgentSkill):
         return any(k in user_query.lower() for k in keywords)
 
     def execute(self, user_query: str, context: str) -> str:
-        if not os.getenv("LLM_API_KEY"):
+        if not settings.LLM_API_KEY:
             return "Error: LLM API Key missing."
             
         chain = self.prompt | self.llm | StrOutputParser()
