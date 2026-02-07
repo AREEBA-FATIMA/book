@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 
     # Embedding Configuration
     embedding_model: str = os.getenv("EMBEDDING_MODEL", "models/text-embedding-004")
-    embedding_dimensions: int = int(os.getenv("EMBEDDING_DIMENSIONS", "768"))
+    embedding_dimensions: int = int(os.getenv("EMBEDDING_DIMENSIONS", "1536"))
 
     # Chunking Configuration
     chunk_size: int = int(os.getenv("CHUNK_SIZE", "512"))

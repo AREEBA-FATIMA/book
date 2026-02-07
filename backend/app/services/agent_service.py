@@ -68,6 +68,7 @@ class AgentService:
         
         # 1. Embed
         embedding = embedding_service.generate_embedding(query)
+        logger.info(f"DEBUG: Query embedding generated with dimension: {len(embedding)}")
         
         # 2. Search (with self-healing for missing collection)
         module_filter = context_overrides.get("module_filter")

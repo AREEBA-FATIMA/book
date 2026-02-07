@@ -37,11 +37,10 @@ class EmbeddingService:
         
         response = self.client.embeddings.create(
             input=[text],
-            model="text-embedding-3-small"
+            model="text-embedding-3-small",
+            dimensions=1536
         )
         emb = response.data[0].embedding
-        with open("vector_debug.log", "a") as f:
-            f.write(f"Query: {text[:20]}... | Model: text-embedding-3-small | Dim: {len(emb)}\n")
         return emb
 
     def _discover_best_model(self) -> str:
